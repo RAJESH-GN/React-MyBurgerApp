@@ -6,3 +6,16 @@
   flex-direction: column;
   align-items: center;
 }
+
+.OrderNow {
+  padding: 10px;
+  text-align: center;
+  background-color: #8f5e1e;
+  color: white;
+}
+
+.OrderNow[disabled] {
+  background-color: grey;
+  color: #ccc;
+  cursor: no-drop;
+}

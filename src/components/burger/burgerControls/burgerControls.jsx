@@ -3,7 +3,7 @@ import BurgerControl from "../burgerControls/burgerControl/burgerControl";
 import classes from "./burgerControls.module.css";
 
 const controls = [
-  { label: "salad", type: "salad" },
+  { label: "Salad", type: "salad" },
   { label: "Meat", type: "meat" },
   { label: "Bacon", type: "bacon" },
   { label: "Cheese", type: "cheese" },
@@ -13,7 +13,7 @@ const burgerControls = (props) => {
   return (
     <div className={classes.BurgerControls}>
       <p>
-        Current Price : <strong>${props.total}</strong>
+        Current Price : <strong>${props.total.toFixed(2)}</strong>
       </p>
       {controls.map((ctrl) => (
         <BurgerControl
@@ -24,6 +24,9 @@ const burgerControls = (props) => {
           removed={() => props.removeIngredient(ctrl.type)}
         />
       ))}
+      <button className={classes.OrderNow} disabled={!props.purchasable}>
+        ORDER NOW
+      </button>
     </div>
   );
 };
