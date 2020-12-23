@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Burger from "../../components/burger/burger";
 import BurgerControls from "../../components/burger/burgerControls/burgerControls";
+import OrderDetails from "../../components/burger/orderDetails/orderDetails";
+import Modal from "../../components/modal/modal";
 import Auxilary from "../../hoc/auxilary";
 
 const INGREDIENTS_PRICE = {
@@ -20,6 +22,7 @@ class BurgerBuilder extends Component {
     },
     total: 4.98,
     purchasable: false,
+    purchasing: false,
   };
 
   updatePurchasable = (updatedIngredients) => {
@@ -56,6 +59,11 @@ class BurgerBuilder extends Component {
     this.updatePurchasable(updatedIngredients);
   };
 
+  handlePurchase = () => {
+    console.log("Opening popup");
+    this.setState({ purchasing: true });
+  };
+
   render() {
     const disbledInfo = { ...this.state.ingredients };
     for (let key in disbledInfo) {
@@ -64,10 +72,14 @@ class BurgerBuilder extends Component {
     return (
       <Auxilary>
         <Burger ingredients={this.state.ingredients} />
+        <Modal show={this.state.purchasing}>
+          <OrderDetails ingredients={this.state.ingredients} />
+        </Modal>
         <BurgerControls
           total={this.state.total}
           disbledInfo={disbledInfo}
           purchasable={this.state.purchasable}
+          handlePurchase={this.handlePurchase}
           addIngredient={(type) => this.addIngredient(type)}
           removeIngredient={(type) => this.removeIngredient(type)}
         />
