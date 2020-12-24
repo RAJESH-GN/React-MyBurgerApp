@@ -1,0 +1,22 @@
+.Button {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3 ease-in;
+  margin: 5px;
+}
+
+.Button:hover {
+  transform: translateY(2px);
+}
+
+.Danger {
+  background-color: #b36922;
+}
+
+.Success {
+  background-color: green;
+}

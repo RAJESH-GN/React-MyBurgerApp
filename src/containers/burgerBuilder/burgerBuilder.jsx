@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import Auxilary from "../../hoc/auxilary";
 import Burger from "../../components/burger/burger";
 import BurgerControls from "../../components/burger/burgerControls/burgerControls";
-import OrderDetails from "../../components/burger/orderDetails/orderDetails";
 import Modal from "../../components/modal/modal";
-import Auxilary from "../../hoc/auxilary";
+import OrderDetails from "../../components/burger/orderDetails/orderDetails";
+import Button from "../../UI/button/button";
 
 const INGREDIENTS_PRICE = {
   cheese: 0.5,
@@ -64,6 +65,14 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: true });
   };
 
+  handleClosePopup = () => {
+    this.setState({ purchasing: false });
+  };
+
+  handleCheckout = () => {
+    alert("You can continue with your order");
+  };
+
   render() {
     const disbledInfo = { ...this.state.ingredients };
     for (let key in disbledInfo) {
@@ -72,8 +81,17 @@ class BurgerBuilder extends Component {
     return (
       <Auxilary>
         <Burger ingredients={this.state.ingredients} />
-        <Modal show={this.state.purchasing}>
-          <OrderDetails ingredients={this.state.ingredients} />
+        <Modal show={this.state.purchasing} closePopup={this.handleClosePopup}>
+          <OrderDetails
+            ingredients={this.state.ingredients}
+            price={this.state.total}
+          />
+          <Button clicked={this.handleClosePopup} btnType="Danger">
+            Cancel
+          </Button>
+          <Button clicked={this.handleCheckout} btnType="Success">
+            Continue
+          </Button>
         </Modal>
         <BurgerControls
           total={this.state.total}

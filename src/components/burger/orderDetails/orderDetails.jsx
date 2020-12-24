@@ -23,6 +23,9 @@ const orderDetails = (props) => {
       <h2>Order Details</h2>
       <p>Delicious Burger with following ingredients: </p>
       <ul>{ingredientDetails}</ul>
+      <p>
+        <strong>Price : ${props.price}</strong>
+      </p>
       <p>Continue to checkout ?</p>
     </Aux>
   );
