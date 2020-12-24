@@ -1,0 +1,32 @@
+.Sidebar {
+  height: 100%;
+  width: 70%;
+  background-color: white;
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 16px 10px;
+  transition: transform 0.3s ease-in;
+}
+
+.Sidebar img {
+  width: 100%;
+}
+
+.Logo {
+  height: 10%;
+  width: 80px;
+}
+
+.NavigationItems {
+  margin-top: 20px;
+}
+
+.Open {
+  transform: translateX(1px);
+}
+
+.Closed {
+  transform: translateX(-1000px);
+}
