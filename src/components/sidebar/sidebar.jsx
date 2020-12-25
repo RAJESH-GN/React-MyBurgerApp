@@ -7,7 +7,6 @@ import classes from "./sidebar.module.css";
 
 const sidebar = (props) => {
   let sideDrawerClosed = [classes.Sidebar, classes.Closed];
-  console.log(props.open);
   if (props.open) {
     sideDrawerClosed = [classes.Sidebar, classes.Open];
   }

@@ -6,7 +6,7 @@ import Sidebar from "../sidebar/sidebar";
 
 class Layouts extends Component {
   state = {
-    showSideDrawer: true,
+    showSideDrawer: false,
   };
 
   handleBackdropClosed = () => {
