@@ -6,6 +6,7 @@ import Modal from "../../components/modal/modal";
 import OrderDetails from "../../components/burger/orderDetails/orderDetails";
 import axios from "./../../axios-order";
 import Button from "../../UI/button/button";
+import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler";
 
 const INGREDIENTS_PRICE = {
   cheese: 0.5,
@@ -80,9 +81,11 @@ class BurgerBuilder extends Component {
       },
       type: "fastest",
     };
+    console.log("ready to make a service call");
     axios
-      .post("/order.json", orderDetails)
+      .post("/order", orderDetails)
       .then((res) => {
+        console.log("came with response");
         this.setState({ purchasing: false });
       })
       .catch((error) => this.setState({ purchasing: false }));
@@ -121,4 +124,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);
