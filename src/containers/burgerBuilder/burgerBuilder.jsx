@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Auxilary from "../../hoc/auxilary";
 import Burger from "../../components/burger/burger";
 import BurgerControls from "../../components/burger/burgerControls/burgerControls";
@@ -72,7 +73,7 @@ class BurgerBuilder extends Component {
   };
 
   handleCheckout = () => {
-    const orderDetails = {
+    /* const orderDetails = {
       ingredients: this.state.ingredients,
       total: this.state.total,
       address: {
@@ -81,14 +82,22 @@ class BurgerBuilder extends Component {
       },
       type: "fastest",
     };
-    console.log("ready to make a service call");
     axios
       .post("/order", orderDetails)
       .then((res) => {
         console.log("came with response");
         this.setState({ purchasing: false });
       })
-      .catch((error) => this.setState({ purchasing: false }));
+      .catch((error) => this.setState({ purchasing: false })); */
+    const query = [];
+    for (let i in this.state.ingredients) {
+      query.push(encodeURIComponent(i) + "=" + this.state.ingredients[i]);
+    }
+    console.log(query.join("&"));
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + query.join("&"),
+    });
   };
 
   render() {
@@ -124,4 +133,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+export default withRouter(withErrorHandler(BurgerBuilder, axios));
