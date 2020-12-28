@@ -1,0 +1,17 @@
+.ContactInformationDetails {
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+  width: 70%;
+  margin: 15px auto;
+  box-shadow: 4px 4px 4px #ccc;
+}
+
+.Input {
+  display: block;
+  width: 50%;
+  margin: 10px auto;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 5px;
+}

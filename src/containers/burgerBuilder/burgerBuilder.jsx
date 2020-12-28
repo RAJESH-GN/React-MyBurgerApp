@@ -64,7 +64,6 @@ class BurgerBuilder extends Component {
   };
 
   handlePurchase = () => {
-    console.log("Opening popup");
     this.setState({ purchasing: true });
   };
 
@@ -73,30 +72,14 @@ class BurgerBuilder extends Component {
   };
 
   handleCheckout = () => {
-    /* const orderDetails = {
-      ingredients: this.state.ingredients,
-      total: this.state.total,
-      address: {
-        customerName: "Rajesh",
-        postal: "1185BH",
-      },
-      type: "fastest",
-    };
-    axios
-      .post("/order", orderDetails)
-      .then((res) => {
-        console.log("came with response");
-        this.setState({ purchasing: false });
-      })
-      .catch((error) => this.setState({ purchasing: false })); */
     const query = [];
     for (let i in this.state.ingredients) {
       query.push(encodeURIComponent(i) + "=" + this.state.ingredients[i]);
     }
-    console.log(query.join("&"));
     this.props.history.push({
       pathname: "/checkout",
       search: "?" + query.join("&"),
+      price: this.state.total,
     });
   };
 

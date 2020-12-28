@@ -17,6 +17,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
         (res) => res,
         (err) => {
           this.setState({ error: err });
+          throw err;
         }
       );
     }
@@ -28,8 +29,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
       return (
         <Aux>
           <Modal show={this.state.error} closePopup={this.handleClosePopup}>
-            {this.state.error ? this.state.error.message : null} Something went
-            wrong!!!
+            {this.state.error ? <p>Something went wrong!!!</p> : null}
           </Modal>
           <WrappedComponent {...this.props} />;
         </Aux>
