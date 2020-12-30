@@ -3,24 +3,9 @@ import { Route } from "react-router-dom";
 import CheckoutSummary from "./../../components/checkoutSummary/checkoutSummary";
 import Aux from "./../../hoc/auxilary";
 import ContactInfo from "./../../containers/contactInfo/contactInfo";
+import { connect } from "react-redux";
 
 class Checkout extends Component {
-  state = {
-    ingredients: {},
-    price: 0,
-  };
-
-  componentDidMount() {
-    const queryParams = new URLSearchParams(
-      this.props.location.search
-    ).entries();
-    const ingredients = {};
-    for (let ing of queryParams) {
-      ingredients[ing[0]] = +ing[1];
-    }
-    this.setState({ ingredients, price: this.props.location.price });
-  }
-
   handleCancelClicked = () => {
     this.props.history.goBack();
   };
@@ -35,7 +20,7 @@ class Checkout extends Component {
     return (
       <Aux>
         <CheckoutSummary
-          ingredients={this.state.ingredients}
+          ingredients={this.props.ingredients}
           handleCancelClicked={() => this.handleCancelClicked()}
           handleCheckoutClicked={() => this.handleCheckoutClicked()}
         />
@@ -45,8 +30,8 @@ class Checkout extends Component {
             console.log(this.props);
             return (
               <ContactInfo
-                ingredients={this.state.ingredients}
-                price={this.state.price}
+                ingredients={this.props.ingredients}
+                price={this.props.total}
                 {...this.props}
               />
             );
@@ -57,4 +42,11 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    total: state.total,
+  };
+};
+
+export default connect(mapStateToProps)(Checkout);

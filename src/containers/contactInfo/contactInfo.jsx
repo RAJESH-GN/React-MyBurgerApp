@@ -5,7 +5,6 @@ import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler";
 
 class ContactInfo extends Component {
   handleOrder = (contactInfo) => {
-    console.log(this.props);
     axios
       .post("/order.json", {
         order: this.props.ingredients,
