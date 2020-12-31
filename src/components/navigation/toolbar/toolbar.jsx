@@ -6,7 +6,7 @@ import classes from "./toolbar.module.css";
 const toolbar = (props) => {
   return (
     <div className={classes.Toolbar}>
-      <div className="" onClick={props.handleMenuSidebar}>
+      <div className={classes.Menu} onClick={props.handleMenuSidebar}>
         Menu
       </div>
       <Logo />

@@ -7,7 +7,7 @@
   background-color: #702e05;
   z-index: 99;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   color: white;
 }
@@ -16,11 +16,18 @@
   height: 100%;
 }
 
+.Menu {
+  display: none;
+}
+
 @media (max-width: 500px) {
   .Toolbar {
     justify-content: space-between;
   }
   .DesktopOnly {
     display: none;
+  }
+  .Menu {
+    display: block;
   }
 }

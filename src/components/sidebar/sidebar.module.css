@@ -8,6 +8,13 @@
   top: 0;
   padding: 16px 10px;
   transition: transform 0.3s ease-in;
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .Sidebar {
+    display: block;
+  }
 }
 
 .Sidebar img {
