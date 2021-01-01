@@ -30,6 +30,7 @@ class BurgerBuilder extends Component {
 
   handlePurchase = () => {
     this.setState({ purchasing: true });
+    this.props.purchaseInit();
   };
 
   handleClosePopup = () => {
@@ -51,7 +52,7 @@ class BurgerBuilder extends Component {
         <Modal show={this.state.purchasing} closePopup={this.handleClosePopup}>
           <OrderDetails
             ingredients={this.props.ingredients}
-            price={this.props.total}
+            price={this.props.total.toFixed(2)}
           />
           <Button clicked={this.handleClosePopup} btnType="Danger">
             Cancel
@@ -79,8 +80,8 @@ class BurgerBuilder extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    total: state.total,
+    ingredients: state.burgerBuilderReducer.ingredients,
+    total: state.burgerBuilderReducer.total,
   };
 };
 
@@ -94,6 +95,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     initIngredients: () => {
       dispatch(ActionTypes.initIngredients());
+    },
+    purchaseInit: () => {
+      dispatch(ActionTypes.purchaseInit());
     },
   };
 };

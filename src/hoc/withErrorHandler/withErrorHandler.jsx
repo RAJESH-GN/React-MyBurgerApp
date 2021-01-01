@@ -21,6 +21,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
         (err) => {
           console.log(err);
           this.setState({ error: err });
+          throw err;
         }
       );
     }

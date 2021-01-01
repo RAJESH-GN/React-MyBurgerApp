@@ -1,12 +1,21 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
 import ContactInformationDetails from "./../../components/contactInformationDetails/contactInformationDetails";
 import axios from "./../../axios-order";
 import withErrorHandler from "./../../hoc/withErrorHandler/withErrorHandler";
+import * as ActionTypes from "./../../store/actions/index";
 
 class ContactInfo extends Component {
   handleOrder = (contactInfo) => {
-    axios
-      .post("/order.json", {
+    const orderInfo = {
+      order: this.props.ingredients,
+      contactInfo,
+      price: this.props.price,
+    };
+    this.props.createOrder(orderInfo);
+    /* axios
+      .post("/order", {
         order: this.props.ingredients,
         contactInfo,
         price: this.props.price,
@@ -15,18 +24,41 @@ class ContactInfo extends Component {
         console.log("iam inside the response block");
         this.props.history.replace("/");
       })
-      .catch((error) => console.log("Error" + error));
+      .catch((error) => console.log("Error" + error)); */
   };
 
   render() {
+    const orderSuccessRedirect = this.props.order ? <Redirect to="/" /> : null;
     return (
-      <ContactInformationDetails
-        handleOrderWithContactDetails={(contactInfo) => {
-          this.handleOrder(contactInfo);
-        }}
-      />
+      <div>
+        {orderSuccessRedirect}
+        <ContactInformationDetails
+          handleOrderWithContactDetails={(contactInfo) => {
+            this.handleOrder(contactInfo);
+          }}
+        />
+      </div>
     );
   }
 }
 
-export default withErrorHandler(ContactInfo, axios);
+const mapStateToProps = (state) => {
+  return {
+    loading: state.orders.loading,
+    order: state.orders.purchased,
+    ingredients: state.burgerBuilderReducer.ingredients,
+    total: state.burgerBuilderReducer.total,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createOrder: (orderDetails) =>
+      dispatch(ActionTypes.createOrder(orderDetails)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(withRouter(ContactInfo), axios));

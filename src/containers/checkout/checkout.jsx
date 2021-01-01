@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route, withRouter } from "react-router-dom";
 import CheckoutSummary from "./../../components/checkoutSummary/checkoutSummary";
 import Aux from "./../../hoc/auxilary";
 import ContactInfo from "./../../containers/contactInfo/contactInfo";
@@ -17,7 +17,7 @@ class Checkout extends Component {
   };
 
   render() {
-    return (
+    const checkoutpage = (
       <Aux>
         <CheckoutSummary
           ingredients={this.props.ingredients}
@@ -26,27 +26,19 @@ class Checkout extends Component {
         />
         <Route
           path={this.props.match.url + "/contactinfo"}
-          render={() => {
-            console.log(this.props);
-            return (
-              <ContactInfo
-                ingredients={this.props.ingredients}
-                price={this.props.total}
-                {...this.props}
-              />
-            );
-          }}
+          component={ContactInfo}
         />
       </Aux>
     );
+    return this.props.ingredients ? checkoutpage : <Redirect to="/" />;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    total: state.total,
+    ingredients: state.burgerBuilderReducer.ingredients,
+    total: state.burgerBuilderReducer.total,
   };
 };
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps)(withRouter(Checkout));
