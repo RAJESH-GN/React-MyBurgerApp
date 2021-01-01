@@ -38,3 +38,38 @@ export const createOrder = (orderDetails) => {
       .catch((error) => dispatch(purchaseFail()));
   };
 };
+
+export const fetchStart = () => {
+  return {
+    type: ActionType.ORDER_FETCH_START,
+  };
+};
+
+export const fetchSuccess = (orders) => {
+  return {
+    type: ActionType.ORDER_FETCH_SUCCESS,
+    orders: orders,
+  };
+};
+export const fetchFailed = (error) => {
+  return {
+    type: ActionType.ORDER_FETCH_FAILED,
+    error: error,
+  };
+};
+
+export const fetchOrderDetails = () => {
+  return (dispatch) => {
+    dispatch(fetchStart());
+    axios
+      .get("/order.json")
+      .then((res) => {
+        const orders = [];
+        for (let orderid in res.data) {
+          orders.push({ ...res.data[orderid], id: orderid });
+        }
+        dispatch(fetchSuccess(orders));
+      })
+      .catch((err) => dispatch(fetchFailed(err)));
+  };
+};

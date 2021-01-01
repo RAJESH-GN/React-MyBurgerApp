@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import classes from "./myOrders.module.css";
 import axios from "./../../axios-order";
-
+import * as ActionType from "./../../store/actions/index";
+import { connect } from "react-redux";
 class MyOrders extends Component {
   state = {
     orders: [],
   };
 
   componentDidMount() {
-    axios
-      .get("/order.json")
-      .then((res) => {
-        const orders = [];
-        for (let orderid in res.data) {
-          orders.push({ ...res.data[orderid], id: orderid });
-        }
-        this.setState({ orders: orders });
-      })
-      .catch((err) => console.log(err));
+    this.props.fetchOrders();
   }
 
   loadOrderWithIngredients = (orderInfo) => {
@@ -28,7 +20,7 @@ class MyOrders extends Component {
   };
 
   render() {
-    return this.state.orders.map((order) => {
+    return this.props.orders.map((order) => {
       return (
         <div className={classes.Myorders} key={order.id}>
           <p>
@@ -44,4 +36,15 @@ class MyOrders extends Component {
   }
 }
 
-export default MyOrders;
+const mapStateToProps = (state) => {
+  return {
+    orders: state.orders.order,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchOrders: () => dispatch(ActionType.fetchOrderDetails()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrders);
