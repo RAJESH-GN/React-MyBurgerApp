@@ -14,10 +14,13 @@ const withErrorHandler = (WrappedComponent, axios) => {
         return req;
       });
       axios.interceptors.response.use(
-        (res) => res,
+        (res) => {
+          console.log(res);
+          return res;
+        },
         (err) => {
+          console.log(err);
           this.setState({ error: err });
-          throw err;
         }
       );
     }
