@@ -9,11 +9,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import burgerBuilderReducer from "./store/reducers/burgerbuilder";
 import order from "./store/reducers/order";
+import login from "./store/reducers/login";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
   burgerBuilderReducer: burgerBuilderReducer,
   orders: order,
+  login: login,
 });
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 

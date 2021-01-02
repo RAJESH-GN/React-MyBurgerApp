@@ -1,11 +1,15 @@
 import React from "react";
 import classes from "./customInput.module.css";
 const CustomInput = (props) => {
+  let classNames = [classes.Input];
+  if (!props.isvalid) {
+    classNames.push(classes.Error);
+  }
   switch (props.elementtype) {
     case "input":
       return (
         <input
-          className={classes.Input}
+          className={classNames.join(" ")}
           {...props}
           value={props.value}
           onChange={(event) => props.onChange(event, props.name)}
