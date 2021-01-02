@@ -17,7 +17,7 @@ export const loginSuccess = (token, expiresIn) => {
 export const loginFailed = (err) => {
   return {
     type: ActionTypes.LOGIN_FAILURE,
-    err: err,
+    error: err,
   };
 };
 
@@ -26,7 +26,7 @@ export const login = (loginDetails) => {
     dispatch(loginStart());
     axios
       .post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCAR7cT7bNPuNBnIZm-aok1s4yya8otfdc",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=key",
         loginDetails
       )
       .then((res) => {
