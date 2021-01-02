@@ -34,6 +34,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
+        total: 4.98,
       };
 
     case actionsType.FETCH_INGREDIENTS_ERROR:
