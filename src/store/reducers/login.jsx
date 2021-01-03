@@ -11,6 +11,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        ldToken: null,
       };
 
     case ActionTypes.LOGIN_SUCCESS:

@@ -17,8 +17,9 @@ class BurgerBuilder extends Component {
   };
 
   componentWillMount() {
-    console.log("came in mount");
-    this.props.initIngredients(axios);
+    if (this.props.idToken && this.props.ingredients) {
+      this.setState({ purchasing: true });
+    } else this.props.initIngredients(axios);
   }
 
   updatePurchasable = (updatedIngredients) => {
@@ -29,8 +30,13 @@ class BurgerBuilder extends Component {
   };
 
   handlePurchase = () => {
-    this.setState({ purchasing: true });
-    this.props.purchaseInit();
+    if (this.props.idToken) {
+      this.setState({ purchasing: true });
+      this.props.purchaseInit();
+    } else {
+      this.props.setIngredients(this.props.ingredients, this.props.total);
+      this.props.history.push("/auth");
+    }
   };
 
   handleClosePopup = () => {
@@ -64,6 +70,7 @@ class BurgerBuilder extends Component {
         <BurgerControls
           total={this.props.total}
           disbledInfo={disbledInfo}
+          token={this.props.idToken}
           purchasable={
             this.props.ingredients
               ? this.updatePurchasable(this.props.ingredients)
@@ -82,6 +89,7 @@ const mapStateToProps = (state) => {
   return {
     ingredients: state.burgerBuilderReducer.ingredients,
     total: state.burgerBuilderReducer.total,
+    idToken: state.login.idToken,
   };
 };
 
@@ -89,6 +97,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addIngredient: (type) => {
       dispatch(ActionTypes.addIngredients(type));
+    },
+    setIngredients: (ings, total) => {
+      dispatch(ActionTypes.setIngredients(ings, total));
     },
     removeIngredient: (type) => {
       dispatch(ActionTypes.removeIngredients(type));

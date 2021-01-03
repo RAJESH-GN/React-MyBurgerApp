@@ -11,9 +11,9 @@ class ContactInfo extends Component {
     const orderInfo = {
       order: this.props.ingredients,
       contactInfo,
-      price: this.props.price,
+      price: this.props.total,
     };
-    this.props.createOrder(orderInfo);
+    this.props.createOrder(orderInfo, this.props.idToken);
     /* axios
       .post("/order", {
         order: this.props.ingredients,
@@ -48,13 +48,14 @@ const mapStateToProps = (state) => {
     order: state.orders.purchased,
     ingredients: state.burgerBuilderReducer.ingredients,
     total: state.burgerBuilderReducer.total,
+    idToken: state.login.idToken,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createOrder: (orderDetails) =>
-      dispatch(ActionTypes.createOrder(orderDetails)),
+    createOrder: (orderDetails, idToken) =>
+      dispatch(ActionTypes.createOrder(orderDetails, idToken)),
   };
 };
 

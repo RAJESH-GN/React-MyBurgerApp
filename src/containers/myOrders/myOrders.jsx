@@ -9,7 +9,7 @@ class MyOrders extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchOrders();
+    this.props.fetchOrders(this.props.idToken);
   }
 
   loadOrderWithIngredients = (orderInfo) => {
@@ -39,12 +39,13 @@ class MyOrders extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.orders.order,
+    idToken: state.login.idToken,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchOrders: () => dispatch(ActionType.fetchOrderDetails()),
+    fetchOrders: (idToken) => dispatch(ActionType.fetchOrderDetails(idToken)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MyOrders);

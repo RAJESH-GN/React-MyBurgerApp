@@ -15,10 +15,11 @@ export const removeIngredients = (type) => {
   };
 };
 
-export const setIngredients = (ingredients) => {
+export const setIngredients = (ingredients, total) => {
   return {
     type: ActionTypes.SET_INGREDIENTS,
     ingredients,
+    total,
   };
 };
 
@@ -34,7 +35,7 @@ export const initIngredients = () => {
     axios
       .get("/ingredients.json")
       .then((res) => {
-        dispatch(setIngredients(res.data));
+        dispatch(setIngredients(res.data, 4.98));
       })
       .catch((err) => {
         dispatch(fetchIngredientsFailure(err));

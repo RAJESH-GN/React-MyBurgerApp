@@ -1,0 +1,9 @@
+.Auth {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px #ccc;
+  border: 1px solid #ccc;
+  padding: 20px;
+}

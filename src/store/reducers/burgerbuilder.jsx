@@ -8,6 +8,7 @@ const INGREDIENTS_PRICE = {
 const initialState = {
   ingredients: null,
   total: 4.98,
+  purchasing: false,
   error: null,
 };
 const reducer = (state = initialState, action) => {
@@ -34,7 +35,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
-        total: 4.98,
+        total: action.total,
       };
 
     case actionsType.FETCH_INGREDIENTS_ERROR:

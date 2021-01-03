@@ -10,6 +10,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.PURCHASING_INIT:
       return {
         ...state,
+        order: [],
         purchased: false,
       };
     case ActionType.PURCHASING_START:

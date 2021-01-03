@@ -29,7 +29,7 @@ const burgerControls = (props) => {
         disabled={!props.purchasable}
         onClick={props.handlePurchase}
       >
-        ORDER NOW
+        {props.token ? "ORDER NOW" : "Signup To Order"}
       </button>
     </div>
   );
