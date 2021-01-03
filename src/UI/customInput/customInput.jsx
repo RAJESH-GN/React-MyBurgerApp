@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./customInput.module.css";
 const CustomInput = (props) => {
   let classNames = [classes.Input];
-  if (!props.isvalid) {
+  if (!props.isvalid && props.touched) {
     classNames.push(classes.Error);
   }
   switch (props.elementtype) {
@@ -13,10 +13,9 @@ const CustomInput = (props) => {
           {...props}
           value={props.value}
           onChange={(event) => props.onChange(event, props.name)}
+          onBlur={props.focusOut}
         />
       );
-    case "select":
-      return <select name=""></select>;
     default:
       break;
   }

@@ -18,6 +18,7 @@ class Login extends Component {
           required: true,
         },
         isvalid: false,
+        touched: false,
         value: "",
       },
       password: {
@@ -31,6 +32,7 @@ class Login extends Component {
           minLength: 6,
         },
         isvalid: false,
+        touched: false,
         value: "",
       },
     },
@@ -55,6 +57,7 @@ class Login extends Component {
       updateControlsField.value,
       updateControlsField.validation
     );
+    updateControlsField.touched = true;
     updatedControls[name] = updateControlsField;
     this.setState({ controls: updatedControls });
   };
@@ -62,6 +65,15 @@ class Login extends Component {
   formSubmit = (event) => {
     event.preventDefault();
     console.log(event);
+  };
+
+  focusOut = (value, validation, name) => {
+    this.checkValidity(value, validation);
+    const updatedformControls = { ...this.state.controls };
+    const updateElement = { ...updatedformControls[name] };
+    updateElement.touched = true;
+    updatedformControls[name] = updateElement;
+    this.setState({ controls: updatedformControls });
   };
 
   handleLogin = () => {
@@ -88,6 +100,14 @@ class Login extends Component {
                 type={this.state.controls[el].elementConfig.type}
                 placeholder={this.state.controls[el].elementConfig.placeholder}
                 isvalid={this.state.controls[el].isvalid}
+                touched={this.state.controls[el].touched}
+                focusOut={() =>
+                  this.focusOut(
+                    this.state.controls[el].value,
+                    this.state.controls[el].validation,
+                    el
+                  )
+                }
                 onChange={(eventVal, inputElementName) =>
                   this.changeHandler(eventVal, inputElementName)
                 }
