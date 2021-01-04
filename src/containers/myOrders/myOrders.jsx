@@ -28,7 +28,7 @@ class MyOrders extends Component {
             {this.loadOrderWithIngredients(order)}
           </p>
           <p>
-            <strong>Price:</strong>USD{order.price}
+            <strong>Price: </strong>$ {order.price}
           </p>
         </div>
       );
