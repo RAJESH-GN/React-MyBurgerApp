@@ -4,6 +4,7 @@ export {
   removeIngredients,
   initIngredients,
   fetchIngredientsFailure,
+  setIngredientsAddedSignUp,
 } from "./burgerBuilder";
 export {
   purchaseInit,

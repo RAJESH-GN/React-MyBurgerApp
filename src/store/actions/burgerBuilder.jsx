@@ -30,6 +30,13 @@ export const fetchIngredientsFailure = (err) => {
   };
 };
 
+export const setIngredientsAddedSignUp = (ingredientsAddedSignUp) => {
+  return {
+    type: ActionTypes.INGREDIENTS_ADD_SIGNUP,
+    ingredientsAddedSignUp: ingredientsAddedSignUp,
+  };
+};
+
 export const initIngredients = () => {
   return (dispatch) => {
     axios

@@ -17,7 +17,7 @@ class BurgerBuilder extends Component {
   };
 
   componentWillMount() {
-    if (this.props.idToken && this.props.ingredients) {
+    if (this.props.idToken && this.props.ingredientsAddedSignUp) {
       this.setState({ purchasing: true });
     } else this.props.initIngredients(axios);
   }
@@ -35,6 +35,7 @@ class BurgerBuilder extends Component {
       this.props.purchaseInit();
     } else {
       this.props.setIngredients(this.props.ingredients, this.props.total);
+      this.props.setIngredientsAddedSignUp(true);
       this.props.history.push("/auth");
     }
   };
@@ -90,6 +91,8 @@ const mapStateToProps = (state) => {
     ingredients: state.burgerBuilderReducer.ingredients,
     total: state.burgerBuilderReducer.total,
     idToken: state.login.idToken,
+    purchased: state.orders.purchased,
+    ingredientsAddedSignUp: state.burgerBuilderReducer.ingredientsAddedSignUp,
   };
 };
 
@@ -109,6 +112,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     purchaseInit: () => {
       dispatch(ActionTypes.purchaseInit());
+    },
+    setIngredientsAddedSignUp: (ingredientsAddedSignUp) => {
+      dispatch(ActionTypes.setIngredientsAddedSignUp(ingredientsAddedSignUp));
     },
   };
 };

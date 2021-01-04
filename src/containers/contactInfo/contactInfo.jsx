@@ -14,6 +14,7 @@ class ContactInfo extends Component {
       price: this.props.total,
     };
     this.props.createOrder(orderInfo, this.props.idToken);
+    this.props.setIngredientsAddedSignUp(false);
     /* axios
       .post("/order", {
         order: this.props.ingredients,
@@ -56,6 +57,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createOrder: (orderDetails, idToken) =>
       dispatch(ActionTypes.createOrder(orderDetails, idToken)),
+    setIngredientsAddedSignUp: (ingsOnSignUp) => {
+      dispatch(ActionTypes.setIngredientsAddedSignUp(ingsOnSignUp));
+    },
   };
 };
 

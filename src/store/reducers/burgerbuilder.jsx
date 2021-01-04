@@ -8,7 +8,7 @@ const INGREDIENTS_PRICE = {
 const initialState = {
   ingredients: null,
   total: 4.98,
-  purchasing: false,
+  ingredientsAddedSignUp: false,
   error: null,
 };
 const reducer = (state = initialState, action) => {
@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
           [action.ingredientType]: state.ingredients[action.ingredientType] + 1,
         },
         total: state.total + INGREDIENTS_PRICE[action.ingredientType],
+        ingredientsAddedSignUp: false,
       };
     case actionsType.REMOVE_INGREDIENTS:
       return {
@@ -42,6 +43,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+      };
+
+    case actionsType.INGREDIENTS_ADD_SIGNUP:
+      return {
+        ...state,
+        ingredientsAddedSignUp: action.ingredientsAddedSignUp,
       };
 
     default:
